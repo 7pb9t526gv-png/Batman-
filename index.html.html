@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Little Secret</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:#050505;color:#f4f1ea;font-family:Georgia,serif;display:flex;align-items:center;justify-content:center;overflow:hidden}
+body:before{content:"";position:fixed;inset:0;background:radial-gradient(circle at 50% 35%,#242424 0,#0c0c0c 38%,#020202 75%);z-index:-2}
+body:after{content:"🦇";position:fixed;font-size:190px;opacity:.035;right:-20px;top:-35px;transform:rotate(-12deg);z-index:-1}
+.card{width:min(92vw,430px);padding:42px 28px 34px;text-align:center;border:1px solid #3b3b3b;border-radius:28px;background:rgba(12,12,12,.86);box-shadow:0 25px 80px #000, inset 0 0 35px rgba(255,255,255,.025)}
+.bat{font-size:58px;filter:grayscale(1);margin-bottom:10px}
+.kicker{font:700 11px/1.4 Arial,sans-serif;letter-spacing:5px;color:#aaa;text-transform:uppercase}
+h1{font-size:43px;letter-spacing:2px;margin:13px 0 8px;font-weight:500}
+.sub{font-size:15px;color:#aaa;font-style:italic;margin-bottom:28px}
+.info{display:flex;justify-content:center;gap:30px;margin:0 0 30px}
+.info div{min-width:105px}
+.label{font:700 9px Arial,sans-serif;letter-spacing:3px;color:#777;text-transform:uppercase;margin-bottom:7px}
+.value{font-size:19px}
+.buttons{display:grid;gap:11px}
+button{border:1px solid #666;border-radius:15px;background:#f2eee6;color:#090909;padding:15px 14px;font:700 12px Arial,sans-serif;letter-spacing:2px;cursor:pointer;transition:.2s}
+button:hover{transform:translateY(-2px);background:#fff}
+button.alt{background:transparent;color:#eee;border-color:#444}
+#location{display:none;margin-top:25px;padding:17px;border-radius:16px;background:#151515;border:1px solid #333}
+#location strong{display:block;font:700 9px Arial,sans-serif;letter-spacing:3px;color:#888;margin-bottom:8px}
+#location a{color:#fff;text-decoration:none;font-size:15px}
+.small{margin-top:24px;font:10px Arial,sans-serif;letter-spacing:1px;color:#555}
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="bat">🦇</div>
+  <div class="kicker">A little secret</div>
+  <h1>You’re Invited</h1>
+  <div class="sub">Somewhere after dark...</div>
+
+  <section class="info">
+    <div><div class="label">Date</div><div class="value">03 · 10 · 2026</div></div>
+    <div><div class="label">Time</div><div class="value">9:00 PM</div></div>
+  </section>
+
+  <div class="buttons">
+    <button onclick="showLocation()">YES, I'LL BE THERE</button>
+    <button class="alt" id="noBtn" type="button">NO 😈</button>
+  </div>
+
+  <div id="location">
+    <strong>THE SECRET LOCATION</strong>
+    <a href="https://www.google.com/maps/search/?api=1&query=24.817992%2C46.791327" target="_blank">Tap here to open the location 📍</a>
+  </div>
+
+  <div class="small">COME CURIOUS. LEAVE WITH A STORY.</div>
+</main>
+
+<script>
+function showLocation(){
+  document.getElementById('location').style.display='block';
+  document.getElementById('location').scrollIntoView({behavior:'smooth',block:'center'});
+}
+const noBtn=document.getElementById('noBtn');
+function dodge(e){
+  if(e)e.preventDefault();
+  const m=20, maxX=Math.max(m,innerWidth-noBtn.offsetWidth-m), maxY=Math.max(m,innerHeight-noBtn.offsetHeight-m);
+  noBtn.style.position='fixed'; noBtn.style.left=(m+Math.random()*(maxX-m))+'px'; noBtn.style.top=(m+Math.random()*(maxY-m))+'px'; noBtn.style.zIndex='99999';
+}
+noBtn.addEventListener('pointerdown',dodge);
+noBtn.addEventListener('touchstart',dodge,{passive:false});
+noBtn.addEventListener('mouseenter',dodge);
+noBtn.addEventListener('click',dodge);
+</script>
+</body>
+</html>
